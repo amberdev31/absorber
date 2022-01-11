@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String TAG = getClass().getSimpleName();
         ImageView imageView;
         Button cameraBtn;
+        FloatingActionButton fab;
         final static int TAKE_PICTURE = 1;
 
         String mCurrentPhotoPath;
@@ -47,6 +50,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 // 카메라 버튼에 리스터 추가
             cameraBtn.setOnClickListener(this);
+
+            fab = (FloatingActionButton)findViewById(R.id.fab_btn);
+
+            // 플로팅 버튼
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()) {
+                        case R.id.fab_btn:
+                            // 카메라 앱을 여는 소스
+                            dispatchTakePictureIntent();
+                            break;
+                    }
+                }
+            });
 
 // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -69,16 +88,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        // 버튼 onClick리스터 처리부분
+
+        // 버튼 onClickListener 처리부분
         @Override
         public void onClick(View v) {
-            switch(v.getId()){
+            switch (v.getId()) {
                 case R.id.camera_button:
 // 카메라 앱을 여는 소스
                     dispatchTakePictureIntent();
                     break;
             }
         }
+
+
 
         // 카메라로 촬영한 영상을 가져오는 부분
         @Override
@@ -134,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         private File createImageFile() throws IOException {
 // Create an image file name
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = "JPEG_" + timeStamp + "_";
+            String imageFileName = "yh_absorber_" + timeStamp + "_";
             File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             File image = File.createTempFile(
                     imageFileName, /* prefix */
