@@ -19,7 +19,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         final String TAG = getClass().getSimpleName();
         ImageView imageView;
-        Button cameraBtn;
+        Button textBtn;
+        EditText editText;
         FloatingActionButton fab;
         final static int TAKE_PICTURE = 1;
 
@@ -46,10 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 // 레이아웃과 변수 연결
             imageView = findViewById(R.id.imageview);
-            cameraBtn = findViewById(R.id.camera_button);
+            textBtn = findViewById(R.id.text_button);
+            editText = findViewById(R.id.editText);
 
-// 카메라 버튼에 리스터 추가
-            cameraBtn.setOnClickListener(this);
+// 텍스 버튼에 리스터 추가
+            textBtn.setOnClickListener(this);
 
             fab = (FloatingActionButton)findViewById(R.id.fab_btn);
 
@@ -92,15 +96,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 버튼 onClickListener 처리부분
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.camera_button:
-// 카메라 앱을 여는 소스
-                    dispatchTakePictureIntent();
-                    break;
-            }
+            editText.setText(editText.getText());
         }
-
-
 
         // 카메라로 촬영한 영상을 가져오는 부분
         @Override
