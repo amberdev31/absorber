@@ -9,6 +9,7 @@ Just capture them with this app, so that you can always watch and think about th
 - Add a basic camera function
 - BASELINE: https://m.blog.naver.com/whdals0/221408855795
 <br>
+
 #### Beta v0.1.1 released (2022/01/11):
 - Change button to floating action button
 - BASELINE: https://fjdkslvn.tistory.com/19
