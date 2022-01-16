@@ -12,3 +12,7 @@ Just capture them with this app, so that you can always watch and think about th
 #### Beta v0.1.1 released (2022/01/11):
 - Change button to floating action button
 - BASELINE: https://fjdkslvn.tistory.com/19
+<br>
+
+#### Beta v0.1.2 released (2022/01/13):
+- Add EditText feature
