@@ -17,7 +17,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,29 +49,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
-// 레이아웃과 변수 연결
+            // 레이아웃과 변수 연결
             imageView = findViewById(R.id.imageview);
             textBtn = findViewById(R.id.text_button);
             editText = findViewById(R.id.editText);
-
-// 텍스 버튼에 리스터 추가
-            textBtn.setOnClickListener(this);
-
             fab = (FloatingActionButton)findViewById(R.id.fab_btn);
 
-            // 플로팅 버튼
-
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch (v.getId()) {
-                        case R.id.fab_btn:
-                            // 카메라 앱을 여는 소스
-                            dispatchTakePictureIntent();
-                            break;
-                    }
-                }
-            });
+            fab.setOnClickListener(this);
+            editText.setOnClickListener(this);
+            // editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                // @Override
+                // public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                    // String inText = textView.getText().toString();
+                    // Do Something...
+                    // textView.setInputType(EditorInfo.TYPE_NULL);// setCursorVisible(true); 도 가능하다.
+                    // return true;
+                // }
+            // });
 
 // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -82,21 +78,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.editText) {
+                editText.setText(editText.getText());
+                // ((EditText)v).setInputType(EditorInfo.TYPE_CLASS_TEXT); // setCursorVisible(true);
+            } else if (v.getId() == R.id.fab_btn) {
+                switch (v.getId()) {
+                    case R.id.fab_btn:
+                        // 카메라 앱을 여는 소스
+                        dispatchTakePictureIntent();
+                        break;
+                }
+            }
+        }
+
         // 권한 요청
         @Override
         public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
             Log.d(TAG, "onRequestPermissionsResult");
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Log.d(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
             }
-        }
-
-
-        // 버튼 onClickListener 처리부분
-        @Override
-        public void onClick(View v) {
-            editText.setText(editText.getText());
         }
 
         // 카메라로 촬영한 영상을 가져오는 부분

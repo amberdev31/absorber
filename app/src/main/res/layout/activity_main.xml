@@ -50,6 +50,7 @@
         android:textColor="@color/amber_700"
         android:textSize="20dp"
         android:textStyle="bold"
+        android:background="@android:color/transparent"
         app:layout_anchor="@+id/linearLayout"
         app:layout_anchorGravity="top|center" />
 
