@@ -21,3 +21,8 @@ Just capture them with this app, so that you can always watch and think about th
 #### Beta v0.1.3 released (2022/01/16):
 - Cursor of EditText is now unvisible while you're not typing text
 - BASELINE: https://choi2079.tistory.com/2
+
+
+#### Beta v0.1.3.1 released (2022/01/19):
+- Bug fixed
+- BASELINE: https://stackoverflow.com/questions/3890033/how-to-remove-focus-from-single-edittext
