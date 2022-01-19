@@ -1,11 +1,14 @@
 package com.youhyeok.absorber;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,11 +18,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,15 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             fab.setOnClickListener(this);
             editText.setOnClickListener(this);
-            // editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                // @Override
-                // public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                    // String inText = textView.getText().toString();
-                    // Do Something...
-                    // textView.setInputType(EditorInfo.TYPE_NULL);// setCursorVisible(true); 도 가능하다.
-                    // return true;
-                // }
-            // });
+
 
 // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View v) {
             if (v.getId() == R.id.editText) {
                 editText.setText(editText.getText());
-                // ((EditText)v).setInputType(EditorInfo.TYPE_CLASS_TEXT); // setCursorVisible(true);
+                v.clearFocus();
             } else if (v.getId() == R.id.fab_btn) {
                 switch (v.getId()) {
                     case R.id.fab_btn:
